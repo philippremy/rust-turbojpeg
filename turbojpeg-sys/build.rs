@@ -174,8 +174,8 @@ fn build_vendor(link_kind: LinkKind) -> Result<Library> {
     let is_msvc = env("CARGO_CFG_TARGET_ENV").unwrap() == "msvc";
     let is_windows_gnullvm = env("CARGO_CFG_TARGET_ENV").unwrap() == "gnu" && env("CARGO_CFG_TARGET_OS").unwrap() == "windows";
 
-    println!("SEARCH IN {}", PathBuf::from(std::env::var("OUT_DIR").unwrap()).join("lib").display());
-    println!("SEARCH IN {}", lib_path.display());
+    println!("cargo:warning=SEARCH IN {}", PathBuf::from(std::env::var("OUT_DIR").unwrap()).join("lib").display());
+    println!("cargo:warning=SEARCH IN {}", lib_path.display());
     println!("cargo:rustc-link-search={}", PathBuf::from(std::env::var("OUT_DIR").unwrap()).join("lib").display());
     println!("cargo:rustc-link-search={}", lib_path.display());
     println!("cargo:rustc-link-lib={}=turbojpeg{}", match link_kind {
