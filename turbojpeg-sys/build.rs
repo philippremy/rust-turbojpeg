@@ -172,9 +172,9 @@ fn build_vendor(link_kind: LinkKind) -> Result<Library> {
     let include_path = dst_path.join("include");
 
     let is_msvc = env("CARGO_CFG_TARGET_ENV").unwrap() == "msvc";
-    let is_windows_gnullvm = env("CARGO_CFG_TARGET_ENV") == "gnu" && env("CARGO_CFG_TARGET_OS") == "windows";
+    let is_windows_gnullvm = env("CARGO_CFG_TARGET_ENV").unwrap() == "gnu" && env("CARGO_CFG_TARGET_OS").unwrap() == "windows";
 
-    println!("cargo:rustc-link-search=native={}", PathBuf::from(std::env::var("OUT_DIR").unwrap()).join("lib"));
+    println!("cargo:rustc-link-search=native={}", PathBuf::from(std::env::var("OUT_DIR").unwrap()).join("lib").display());
     println!("cargo:rustc-link-search=native={}", lib_path.display());
     println!("cargo:rustc-link-lib={}=turbojpeg{}", match link_kind {
         LinkKind::Static | LinkKind::Default => "static",
